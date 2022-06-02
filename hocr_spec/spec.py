@@ -101,6 +101,11 @@ class HocrSpecProperties(object):
     x_confs = HocrSpecProperty('x_confs', float, list=True, range=[0, 100])
     x_wconf = HocrSpecProperty('x_wconf', float, range=[0, 100])
 
+    # Tesseract-Specific Markup
+    x_size = HocrSpecProperty('x_size', float)
+    x_descenders = HocrSpecProperty('x_descenders', float)
+    x_ascenders = HocrSpecProperty('x_ascenders', float)
+
 class HocrSpecAttributes(object):
 
     class HocrSpecAttribute(object):
