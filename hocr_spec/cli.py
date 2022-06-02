@@ -34,7 +34,7 @@ parser.add_argument(
     '-C',
     action='append',
     metavar='CAPABILITY',
-    choices=HocrSpec.list('capabilities'),
+    choices=['*', *HocrSpec.list('capabilities')],
     help="Enable this capability. Use '*' to enable all capabilities. "
          "In addition to the 'ocr*' classes, you can use %s" %
          HocrSpec.list('capabilities')
