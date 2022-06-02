@@ -7,6 +7,7 @@ from builtins import object
 
 import sys
 import re
+from io import BytesIO
 from lxml import etree
 from functools import wraps
 from .spec import HocrSpec
@@ -111,15 +112,18 @@ class HocrValidator(object):
         Validate a hocr document
 
         Args:
-            source (str): A filename or '-' to read from STDIN
+            source (str): A filename, string containing hocr data, or '-' to read from STDIN
             parse_strict (bool): Whether to be strict about broken HTML. Default: False
             filename (str): Filename to use in the reports. Set this if reading
                             from STDIN for nicer output
 
         """
         parser = etree.HTMLParser(recover=parse_strict)
+
         if not filename: filename = source
         if source == '-': source = sys.stdin
+        if source.startswith('<'): source = BytesIO(source.encode())
+
         doc = etree.parse(source, parser)
         root = doc.getroot()
         report = HocrValidator.Report(filename)
